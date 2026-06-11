@@ -1,6 +1,10 @@
+<p align="center">
+  <img src="public/helicon.svg" width="96" alt="Helicon — the Haglaz rune, ringed like its namesake planet" />
+</p>
+
 # Helicon
 
-**The [Runek](https://github.com/nullorder/runek) showcase world** — a walkable,
+**The [Runek](https://runek.nullorder.org/) showcase world** — a walkable,
 editable, procedurally generated island: a house on a terraformed hill, a lake, a
 shore, trees grown from L-systems, and furniture seeded into place. Built entirely
 from Runek components; no models, no textures, no CDN.
@@ -26,6 +30,9 @@ The entire scene lives in [`public/helicon.world.json`](./public/helicon.world.j
 a list of `{ type, props }` nodes plus a world-level `palette` and `fog`. Every
 component is a pure, deterministic function of its props (`seed` included), so
 the same file renders the same world on every machine.
+
+Every component, its props, and its defaults are documented in the
+[Runek docs](https://runek.nullorder.org/).
 
 ## Runek source
 
