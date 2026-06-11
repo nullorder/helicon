@@ -5,6 +5,7 @@
   "description": "The Runek showcase world — a walkable, editable procedural island built entirely from Runek components.",
   "license": "MIT",
   "type": "module",
+  "packageManager": "pnpm@10.15.1",
   "engines": {
     "node": ">=20"
   },
