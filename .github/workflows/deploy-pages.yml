@@ -28,7 +28,9 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - run: pnpm build --base=/${{ github.event.repository.name }}/
+      # Served from the root of the custom domain (helicon.nullorder.org),
+      # so Vite's default base of "/" is correct.
+      - run: pnpm build
 
       - uses: actions/upload-pages-artifact@v3
         with:
