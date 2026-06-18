@@ -1,5 +1,5 @@
 import { useFrame } from '@react-three/fiber'
-import { rng, useWorld, type Vec3 } from './core'
+import { rng, useWorld, type Vec3 } from '@runek/core'
 import { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 

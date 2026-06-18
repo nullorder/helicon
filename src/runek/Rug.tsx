@@ -1,4 +1,4 @@
-import { rng, useWorld, type Vec3 } from './core'
+import { rng, useWorld, type Vec3 } from '@runek/core'
 import { useMemo } from 'react'
 
 export interface RugProps {

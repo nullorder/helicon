@@ -1,5 +1,5 @@
 import { RigidBody } from '@react-three/rapier'
-import { useWorld, type Vec3 } from './core'
+import { useWorld, type Vec3 } from '@runek/core'
 
 export interface DoorProps {
   position?: Vec3

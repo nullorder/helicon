@@ -26,17 +26,20 @@ runek.config.json               runek CLI config (registry URL, install dir)
 
 ## Vendored Runek source (`src/runek/`)
 
-`src/runek/` is pulled from the Runek source registry by the `runek` CLI and owned
-by this repo, shadcn-style. Rules:
+`src/runek/` holds component source pulled from the Runek registry by the
+`@runek/cli` CLI and owned by this repo, shadcn-style. The runtime is **not**
+vendored: components import `@runek/core` from npm (a normal dependency), so
+`src/runek/core/` no longer exists. Rules:
 
-- **`just vendor` re-pulls everything with `--overwrite`** (from a local `../runek`
-  checkout by default) — local edits under `src/runek/` will be clobbered. Prefer
+- **`just vendor` re-pulls everything with `--overwrite`** from the live registry
+  (`runek.nullorder.org/r`) via `npx @runek/cli add` — local edits under
+  `src/runek/` will be clobbered. Use `just vendor-local` to pull from a local
+  `../runek` checkout when testing unreleased component changes. Prefer
   upstreaming component fixes to `nullorder/runek`, then re-vendor.
 - `src/registry.ts` and `src/App.tsx` are owned here; when the upstream catalog
   changes, update `src/registry.ts` to match.
-- Once `@runek/cli` is published and the registry is live at
-  `runek.nullorder.org/r`, vendoring becomes `npx runek add --overwrite …`
-  (see `runek.config.json`).
+- Bump `@runek/core` like any other dependency (`pnpm update @runek/core`) to
+  pick up runtime, editor, and palette improvements.
 
 ## Commands
 
@@ -50,7 +53,8 @@ just build      # typecheck + production build
 just preview    # preview the production build
 just typecheck  # tsc --noEmit
 just check      # the verification gate (typecheck + build)
-just vendor     # re-pull Runek source from ../runek (or a given path)
+just vendor     # re-pull Runek component source from the live registry
+just vendor-local  # re-pull from a local ../runek checkout (or a given path)
 just clean      # remove build output + node_modules
 ```
 

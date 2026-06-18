@@ -1,5 +1,5 @@
 import { RigidBody } from '@react-three/rapier'
-import { useWorld, type Vec3 } from './core'
+import { useWorld, type Vec3 } from '@runek/core'
 
 /** A rectangular hole cut into a wall, for a door or window. */
 export interface WallOpening {

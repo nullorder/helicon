@@ -1,4 +1,4 @@
-import { useWorld, type Vec3 } from './core'
+import { useWorld, type Vec3 } from '@runek/core'
 import { Door } from './Door'
 import { Floor } from './Floor'
 import { Roof, type RoofStyle } from './Roof'

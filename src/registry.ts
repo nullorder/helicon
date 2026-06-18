@@ -3,7 +3,7 @@
 // `just vendor` to refresh them from the registry.
 import { Bookshelf } from './runek/Bookshelf'
 import { Chair } from './runek/Chair'
-import type { ComponentRegistry } from './runek/core'
+import type { ComponentRegistry } from '@runek/core'
 import { Door } from './runek/Door'
 import { Floor } from './runek/Floor'
 import { Grass } from './runek/Grass'

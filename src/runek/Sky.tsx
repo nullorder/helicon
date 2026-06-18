@@ -1,5 +1,5 @@
 import { Sky as DreiSky } from '@react-three/drei'
-import type { Vec3 } from './core'
+import type { Vec3 } from '@runek/core'
 
 export interface SkyProps {
   /** Direction of the sun; also where the bright spot appears. */
