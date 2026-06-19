@@ -1,5 +1,5 @@
 import { CylinderCollider, RigidBody } from '@react-three/rapier'
-import { rng, useWorld, type Vec3 } from './core'
+import { rng, useWorld, type Vec3 } from '@runek/core'
 import { useLayoutEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 

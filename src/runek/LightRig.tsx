@@ -1,4 +1,4 @@
-import type { Vec3 } from './core'
+import type { Vec3 } from '@runek/core'
 
 export interface LightRigProps {
   sunPosition?: Vec3

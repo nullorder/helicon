@@ -1,4 +1,4 @@
-import type { Vec3 } from './core'
+import type { Vec3 } from '@runek/core'
 import Ecctrl from 'ecctrl'
 
 export type PlayerView = 'first' | 'third'

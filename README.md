@@ -36,18 +36,20 @@ Every component, its props, and its defaults are documented in the
 
 ## Runek source
 
-Helicon consumes Runek the way any app does: component source is **vendored**
-under [`src/runek/`](./src/runek) via the `runek` CLI and owned by this repo
-(shadcn-style). To refresh it from a local Runek checkout:
+Helicon consumes Runek the way any app does: the runtime is the published
+[`@runek/core`](https://www.npmjs.com/package/@runek/core) npm dependency, and
+component source is **copied** under [`src/runek/`](./src/runek) via the
+[`@runek/cli`](https://www.npmjs.com/package/@runek/cli) CLI and owned by this
+repo (shadcn-style). To refresh the components:
 
 ```sh
-just vendor             # pulls from ../runek
-just vendor /path/to/runek
+just vendor                  # pulls from the live registry (runek.nullorder.org/r)
+just vendor-local            # pulls from a local ../runek checkout
+just vendor-local /path/to/runek
 ```
 
-Once `@runek/cli` is published and the registry is live at
-`runek.nullorder.org/r`, this becomes `npx runek add --overwrite …`
-(see [`runek.config.json`](./runek.config.json)).
+The copied components import `@runek/core` from npm, so nothing is rewritten on
+the way in (see [`runek.config.json`](./runek.config.json)).
 
 ## License
 

@@ -30,10 +30,14 @@ typecheck:
 # Full verification gate: typecheck + build
 check: build
 
-# Re-pull Runek component source into src/runek from a local runek checkout.
-# Once @runek/cli is on npm and the registry is live, this becomes:
-#   npx runek add --overwrite <components…>
-vendor RUNEK="../runek":
+# Re-pull Runek component source into src/runek from the live registry,
+# overwriting local copies. Components import `@runek/core` (the npm package),
+# so imports are kept verbatim and core is never vendored.
+vendor:
+    npx @runek/cli@latest add --overwrite --no-install {{components}}
+
+# Same, but from a local runek checkout — for testing unreleased component changes.
+vendor-local RUNEK="../runek":
     node {{RUNEK}}/packages/cli/src/index.ts add --overwrite --no-install \
         --registry {{RUNEK}}/registry {{components}}
 

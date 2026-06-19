@@ -1,6 +1,6 @@
 import { useFrame } from '@react-three/fiber'
 import { CuboidCollider, RigidBody } from '@react-three/rapier'
-import { useWorld, type Vec3 } from './core'
+import { useWorld, type Vec3 } from '@runek/core'
 import { useRef } from 'react'
 import type { PointLight } from 'three'
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { registry } from './registry'
-import { parseWorld, type WorldData, WorldEditor, WorldRenderer } from './runek/core'
+import { parseWorld, type WorldData, WorldEditor, WorldRenderer } from '@runek/core'
 
 export function App() {
   const [world, setWorld] = useState<WorldData | null>(null)

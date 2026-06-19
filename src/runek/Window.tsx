@@ -1,4 +1,4 @@
-import { useWorld, type Vec3 } from './core'
+import { useWorld, type Vec3 } from '@runek/core'
 
 export interface WindowProps {
   position?: Vec3
