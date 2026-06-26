@@ -1,7 +1,8 @@
 # Helicon — the Runek showcase world. Run `just` (or `just --list`) to see all recipes.
 
-# Every renderable component in the Runek registry; `core` comes along as a dependency.
-components := "player terrain room house wall floor roof door window staircase table chair lamp rug shelf bookshelf lake shore rocks sky grass trees lightrig"
+# Every renderable component in the Runek registry. `@runek/core` is an npm
+# dependency (package.json), not vendored — components import it directly.
+components := "player terrain room house wall floor roof door window staircase table chair clock sign lamp rug shelf bookshelf lake shore fountain rocks sky clouds grass trees bush flowers hedge lightrig fence bridge arch pillar well path bench bed crate barrel plant campfire birds"
 
 # List available recipes
 default:

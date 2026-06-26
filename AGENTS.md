@@ -9,8 +9,9 @@ Guidelines for AI agents (Claude Code and others) working in this repository.
 entirely from Runek components. No binary assets, no server; deploys as a static site.
 
 The whole scene is **data**: [`public/helicon.world.json`](./public/helicon.world.json)
-(component nodes + a world-level `palette` and `fog`). The app shell just loads that
-file and renders it via `<WorldRenderer>` (walk) or `<WorldEditor>` (edit).
+(component nodes + world-level identity `meta`, `palette`, `fog`, `time`/`avatar`).
+The app shell just loads that file and renders it via `<WorldRenderer>` (walk) or
+`<WorldEditor>` (edit).
 
 ## Repository layout
 
@@ -19,12 +20,12 @@ index.html, vite.config.ts      Vite + React app shell
 src/
   main.tsx, App.tsx, index.css  the app: load the world JSON, Walk/Edit toggle
   registry.ts                   name → component map for data-driven rendering
-  runek/                        VENDORED Runek source (core/ + one file per component)
+  runek/                        copy-first Runek component source (one file each)
 public/helicon.world.json       the world itself — the main thing this repo grows
 runek.config.json               runek CLI config (registry URL, install dir)
 ```
 
-## Vendored Runek source (`src/runek/`)
+## Runek source (`src/runek/`)
 
 `src/runek/` holds component source pulled from the Runek registry by the
 `@runek/cli` CLI and owned by this repo, shadcn-style. The runtime is **not**
@@ -37,7 +38,8 @@ vendored: components import `@runek/core` from npm (a normal dependency), so
   `../runek` checkout when testing unreleased component changes. Prefer
   upstreaming component fixes to `nullorder/runek`, then re-vendor.
 - `src/registry.ts` and `src/App.tsx` are owned here; when the upstream catalog
-  changes, update `src/registry.ts` to match.
+  changes, update `src/registry.ts` (and the `components` list in the `justfile`)
+  to match.
 - Bump `@runek/core` like any other dependency (`pnpm update @runek/core`) to
   pick up runtime, editor, and palette improvements.
 

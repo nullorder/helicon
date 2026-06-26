@@ -27,9 +27,10 @@ and export the world back to JSON.
 ## The world is a file
 
 The entire scene lives in [`public/helicon.world.json`](./public/helicon.world.json) —
-a list of `{ type, props }` nodes plus a world-level `palette` and `fog`. Every
-component is a pure, deterministic function of its props (`seed` included), so
-the same file renders the same world on every machine.
+a list of `{ type, props }` nodes plus world-level identity (`meta`, `source`),
+`palette`, `fog`, and a pinned `time` of day. Every component is a pure,
+deterministic function of its props (`seed` included), so the same file renders
+the same world on every machine.
 
 Every component, its props, and its defaults are documented in the
 [Runek docs](https://runek.nullorder.org/).

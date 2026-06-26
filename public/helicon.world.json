@@ -1,7 +1,20 @@
 {
   "version": 1,
+  "meta": {
+    "title": "Helicon",
+    "description": "The Runek showcase world — a walkable, editable procedural island built entirely from Runek components.",
+    "authors": [{ "name": "Kumar Anirudha", "url": "https://github.com/anistark" }],
+    "license": "CC-BY-4.0",
+    "source": {
+      "url": "https://github.com/nullorder/helicon",
+      "path": "public/helicon.world.json",
+      "branch": "main"
+    }
+  },
   "unit": 1,
   "gravity": [0, -9.81, 0],
+  "time": "15:30",
+  "avatar": "first",
   "palette": {
     "wood": "#75563c",
     "wall": "#d8cfc0",
@@ -13,9 +26,33 @@
     { "type": "Sky", "props": { "sunPosition": [60, 25, 30] } },
     { "type": "LightRig", "props": { "sunPosition": [60, 25, 30], "shadowRange": 34 } },
     {
+      "type": "Clouds",
+      "props": { "position": [0, 32, 0], "count": 6, "area": [90, 90], "drift": 0.4, "seed": 5 }
+    },
+    {
       "type": "Terrain",
       "props": { "size": [120, 120], "relief": 3, "flatRadius": 28, "resolution": 80, "seed": 9 }
     },
+
+    {
+      "type": "Path",
+      "props": { "position": [0, 0.02, 9], "length": 9, "width": 2.2, "seed": 6 }
+    },
+    {
+      "type": "Arch",
+      "props": { "position": [0, 0.02, 12], "width": 3.2, "height": 2.8, "depth": 1.2 }
+    },
+    { "type": "Pillar", "props": { "position": [-2.4, 0.02, 8.5], "height": 3.2, "radius": 0.3 } },
+    { "type": "Pillar", "props": { "position": [2.4, 0.02, 8.5], "height": 3.2, "radius": 0.3 } },
+    {
+      "type": "Fence",
+      "props": { "position": [-4, 0.02, -7], "length": 8, "rails": 3, "seed": 13 }
+    },
+    {
+      "type": "Hedge",
+      "props": { "position": [-9, 0.02, -1], "length": 10, "rotation": [0, 1.5707963267948966, 0], "seed": 21 }
+    },
+
     { "type": "House", "props": { "position": [0, 0.02, 0], "size": [9, 9], "height": 3 } },
     { "type": "Rug", "props": { "position": [0, 0.03, -0.8], "size": [4.5, 3], "seed": 7 } },
     { "type": "Table", "props": { "position": [0, 0.02, -0.8] } },
@@ -34,6 +71,18 @@
     },
     { "type": "Lamp", "props": { "position": [3.4, 0.02, -3.4] } },
     {
+      "type": "Clock",
+      "props": { "position": [1.6, 2.2, -4.35], "radius": 0.5 }
+    },
+    {
+      "type": "Plant",
+      "props": { "position": [3.6, 0.02, 3.4], "height": 1.2, "seed": 31 }
+    },
+    {
+      "type": "Bed",
+      "props": { "position": [-3, 0.02, 3], "rotation": [0, 1.5707963267948966, 0] }
+    },
+    {
       "type": "Staircase",
       "props": {
         "position": [3.4, 0.02, -4],
@@ -43,14 +92,34 @@
         "depth": 2.4
       }
     },
+
+    { "type": "Well", "props": { "position": [-6.5, 0.02, -1], "radius": 1.1 } },
+    { "type": "Fountain", "props": { "position": [-6.5, 0.02, 3.5], "radius": 1.4 } },
+    {
+      "type": "Bench",
+      "props": { "position": [-3.5, 0.02, 6.5], "length": 2, "back": true, "rotation": [0, 3.141592653589793, 0] }
+    },
+    { "type": "Crate", "props": { "position": [5.5, 0.02, 2.5], "size": 0.8, "seed": 17 } },
+    { "type": "Barrel", "props": { "position": [5.6, 0.02, 3.6], "radius": 0.45, "height": 1 } },
+    { "type": "Campfire", "props": { "position": [5.5, 0.02, 8], "radius": 0.8, "seed": 19 } },
+    { "type": "Bush", "props": { "position": [7.5, 0.02, 9.5], "radius": 1.2, "seed": 23 } },
+
     {
       "type": "Grass",
       "props": { "position": [0, 0.02, 11], "area": [30, 12], "count": 900, "seed": 3 }
+    },
+    {
+      "type": "Flowers",
+      "props": { "position": [-7, 0.02, 10], "area": [6, 4], "count": 40, "seed": 27 }
     },
     { "type": "Shore", "props": { "position": [18, 0.03, 0], "size": [24, 26] } },
     {
       "type": "Lake",
       "props": { "position": [18, 0.12, 0], "size": [15, 17], "sunPosition": [60, 25, 30] }
+    },
+    {
+      "type": "Bridge",
+      "props": { "position": [9, 0.5, 3], "length": 7, "width": 2.4, "arch": 0.5, "rails": true, "seed": 2 }
     },
     {
       "type": "Rocks",
@@ -68,6 +137,10 @@
     {
       "type": "Trees",
       "props": { "position": [-15, 0.02, 13], "seed": 15, "segmentLength": 0.9 }
+    },
+    {
+      "type": "Birds",
+      "props": { "position": [0, 13, 0], "count": 7, "area": 16, "height": 3, "speed": 1, "seed": 1 }
     },
     {
       "type": "Player",
