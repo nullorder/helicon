@@ -29,7 +29,7 @@ export function App() {
 
       {!editing && (
         <p className="hint">
-          <b>WASD</b> / arrows move · <b>Shift</b> run · <b>Space</b> jump · <b>drag</b> to look
+          <b>WASD</b> move · <b>arrows</b> look · <b>Shift</b> run · <b>Space</b> jump · <b>drag</b> to look
         </p>
       )}
     </>

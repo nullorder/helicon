@@ -4,6 +4,7 @@ import { CuboidCollider, RigidBody } from '@react-three/rapier'
 import { rng, useWorld, type Vec3 } from '@runek/core'
 import { useLayoutEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
+import { Sign } from './Sign'
 
 /**
  * An addressable book on the shelf. JSON-serializable so a whole shelf of
@@ -19,6 +20,12 @@ export interface BookSpec {
   color?: string
   /** Navigated to on click when no `onBookSelect` is given. */
   href?: string
+  /**
+   * Row to place the book on, counted from the top (0 = top row). Clamped to
+   * the shelf's row count. Books without a row auto-pack bottom-up around the
+   * placed ones.
+   */
+  shelf?: number
 }
 
 export interface BookshelfProps {
@@ -28,6 +35,7 @@ export interface BookshelfProps {
   width?: number
   height?: number
   depth?: number
+  /** Number of rows. Defaults to 3; set 1 or 2 for a shorter case. */
   shelves?: number
   /**
    * Fraction of shelf space filled with procedural decoration, 0–1. Defaults to
@@ -49,6 +57,15 @@ export interface BookshelfProps {
   books?: BookSpec[]
   /** Called with the clicked book. When omitted, a book's `href` is navigated to. */
   onBookSelect?: (book: BookSpec) => void
+  /**
+   * Section label rendered above the shelf, e.g. `"Guides"`. Drawn as a `Sign`
+   * in the world's `display` face.
+   */
+  label?: string
+  /** Label color. Defaults to the world palette's `accent` slot. */
+  labelColor?: string
+  /** Label cap height in units. */
+  labelSize?: number
 }
 
 interface Book {
@@ -72,13 +89,16 @@ export function Bookshelf({
   width = 1.2,
   height = 2,
   depth = 0.3,
-  shelves = 4,
+  shelves = 3,
   fill = 0,
   color,
   backColor,
   seed = 1,
   books: bookSpecs,
   onBookSelect,
+  label,
+  labelColor,
+  labelSize = 0.08,
 }: BookshelfProps) {
   const { unit, palette } = useWorld()
   const frameColor = color ?? palette.wood
@@ -97,9 +117,10 @@ export function Bookshelf({
     const out: Book[] = []
 
     // Configured mode: render exactly the given books. Seeded geometry, but
-    // identity/color come from the spec. Books pack into rows (bottom shelf
-    // first) and each row is centered, so a partly-filled shelf still reads as
-    // intentional rather than left-clustered.
+    // identity/color come from the spec. A book with a `shelf` goes on that row
+    // (0 = top); the rest pack into rows (bottom shelf first). Each row is
+    // centered, so a partly-filled shelf still reads as intentional rather than
+    // left-clustered.
     if (bookSpecs) {
       const sized = bookSpecs.map((spec) => {
         const bw = (0.075 + next() * 0.05) * unit
@@ -120,18 +141,27 @@ export function Bookshelf({
       })
 
       const slack = 0.006 * unit
-      const rows: (typeof sized)[] = [[]]
-      let used = 0
+      // Row arrays are indexed bottom-up (row 0 renders lowest).
+      const rows: (typeof sized)[] = Array.from({ length: shelves }, () => [])
+      const used = new Array<number>(shelves).fill(0)
+      const place = (row: number, book: (typeof sized)[number]) => {
+        used[row] += (rows[row].length ? slack : 0) + book.bw
+        rows[row].push(book)
+      }
+
       for (const book of sized) {
-        const row = rows[rows.length - 1]
-        if (row.length && used + slack + book.bw > inner) {
-          if (rows.length >= shelves) break // out of shelf space
-          rows.push([])
-          used = 0
+        if (book.spec.shelf == null) continue
+        const fromTop = Math.min(Math.max(book.spec.shelf, 0), shelves - 1)
+        place(shelves - 1 - fromTop, book)
+      }
+      let cursor = 0
+      for (const book of sized) {
+        if (book.spec.shelf != null) continue
+        while (cursor < shelves && rows[cursor].length && used[cursor] + slack + book.bw > inner) {
+          cursor++
         }
-        const current = rows[rows.length - 1]
-        used += (current.length ? slack : 0) + book.bw
-        current.push(book)
+        if (cursor >= shelves) break // out of shelf space
+        place(cursor, book)
       }
 
       rows.forEach((row, shelf) => {
@@ -264,6 +294,18 @@ export function Bookshelf({
           <meshStandardMaterial color={frameColor} />
         </mesh>
       ))}
+
+      {/* Section label floating just above the shelf, on its front plane. */}
+      {label && (
+        <Sign
+          position={[0, h / 2 + 0.05 * unit, d / 2]}
+          size={labelSize}
+          color={labelColor}
+          anchorY="bottom"
+        >
+          {label}
+        </Sign>
+      )}
 
       {/* all books in one draw call */}
       {books.length > 0 && (
