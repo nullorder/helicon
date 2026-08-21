@@ -5,9 +5,12 @@
 # Helicon
 
 **The [Runek](https://runek.nullorder.org/) showcase world** — a walkable,
-editable, procedurally generated island: a house on a terraformed hill, a lake, a
-shore, trees grown from L-systems, and furniture seeded into place. Built entirely
-from Runek components; no models, no textures, no CDN.
+editable, procedurally generated coastline: a curved modernist mansion cantilevered
+over an ocean cliff, with a glass-ringed living rotunda, a rooftop bedroom drum, a
+floating pool terrace, palms, and a helipad. An arched gate opens onto a rock
+causeway to the mainland, and the headland's east flank fans out into a sand-spit
+beach with a campfire at the waterline. Built entirely from Runek components; no
+models, no textures, no CDN.
 
 > *Helicon is a world-as-repo: the whole scene is one JSON file. Fork it, edit it,
 > open a PR — the world grows by merge.*

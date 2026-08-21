@@ -2,7 +2,7 @@
   "version": 1,
   "meta": {
     "title": "Helicon",
-    "description": "The Runek showcase world — a walkable, editable procedural island built entirely from Runek components.",
+    "description": "The Runek showcase world \u2014 a curved modernist mansion on an ocean cliff, walkable and editable, built entirely from Runek components.",
     "authors": [
       {
         "name": "Kumar Anirudha",
@@ -22,168 +22,749 @@
     -9.81,
     0
   ],
-  "time": "15:30",
+  "time": "16:30",
   "avatar": "first",
   "palette": {
+    "wall": "#ece8df",
+    "floor": "#d9d2c4",
+    "stone": "#8a8072",
+    "ground": "#5e7f42",
+    "foliage": "#4e7a3f",
     "wood": "#75563c",
-    "wall": "#d8cfc0",
-    "roof": "#7d4f3a",
-    "foliage": "#557d3c"
+    "roof": "#b9b2a4"
   },
   "fog": {
     "color": "#dfe9f5",
-    "near": 35,
-    "far": 110
+    "near": 45,
+    "far": 170
   },
   "nodes": [
     {
       "type": "Sky",
-      "id": "n4n6pgj",
+      "id": "naluz9n",
       "props": {
         "sunPosition": [
-          60,
-          25,
-          30
+          -55,
+          34,
+          -30
         ]
       }
     },
     {
       "type": "LightRig",
-      "id": "n2ukoxv",
+      "id": "nnlh6nc",
       "props": {
         "sunPosition": [
-          60,
-          25,
-          30
+          -55,
+          34,
+          -30
         ],
-        "shadowRange": 34
+        "shadowRange": 42
       }
     },
     {
       "type": "Clouds",
-      "id": "n7kacd3",
+      "id": "nhy49ut",
       "props": {
         "position": [
           0,
-          32,
+          27,
           0
         ],
-        "count": 6,
+        "count": 8,
         "area": [
-          90,
-          90
+          160,
+          160
         ],
-        "drift": 0.4,
+        "drift": 0.5,
         "seed": 5
       }
     },
     {
-      "type": "Terrain",
-      "id": "n0meniv",
+      "type": "Ocean",
+      "id": "n74l3io",
       "props": {
-        "size": [
-          120,
-          120
+        "position": [
+          0,
+          -14.0,
+          0
         ],
-        "relief": 3,
-        "flatRadius": 28,
-        "resolution": 80,
+        "sunPosition": [
+          -55,
+          34,
+          -30
+        ]
+      }
+    },
+    {
+      "type": "Cliff",
+      "id": "noerfkg",
+      "props": {
+        "position": [
+          0,
+          -15.4,
+          0
+        ],
+        "radius": 40,
+        "topRadius": 27,
+        "height": 15,
+        "segments": 12,
+        "rough": 0.42,
+        "color": "#767268",
         "seed": 9
       }
     },
     {
-      "type": "Path",
-      "id": "nkrmvyq",
+      "type": "Slab",
+      "id": "nuz07ob",
+      "props": {
+        "position": [
+          0,
+          0.0,
+          0
+        ],
+        "shape": "disc",
+        "size": [
+          50,
+          50
+        ],
+        "thickness": 0.5,
+        "color": "#5e7f42"
+      }
+    },
+    {
+      "type": "Cliff",
+      "id": "nluyj2t",
+      "props": {
+        "position": [
+          0,
+          -15.4,
+          108
+        ],
+        "radius": 85,
+        "topRadius": 62,
+        "height": 15,
+        "segments": 14,
+        "rough": 0.35,
+        "color": "#767268",
+        "seed": 17
+      }
+    },
+    {
+      "type": "Slab",
+      "id": "nkq5453",
+      "props": {
+        "position": [
+          0,
+          0.0,
+          108
+        ],
+        "shape": "disc",
+        "size": [
+          120,
+          120
+        ],
+        "thickness": 0.5,
+        "color": "#5e7f42"
+      }
+    },
+    {
+      "type": "Cliff",
+      "id": "nbx35v4",
+      "props": {
+        "position": [
+          0,
+          -15.2,
+          29
+        ],
+        "radius": 13,
+        "topRadius": 9,
+        "height": 14.5,
+        "segments": 9,
+        "rough": 0.35,
+        "color": "#767268",
+        "seed": 31
+      }
+    },
+    {
+      "type": "Cliff",
+      "id": "nmnxlcf",
+      "props": {
+        "position": [
+          0,
+          -15.2,
+          37
+        ],
+        "radius": 13,
+        "topRadius": 9,
+        "height": 14.5,
+        "segments": 9,
+        "rough": 0.35,
+        "color": "#767268",
+        "seed": 32
+      }
+    },
+    {
+      "type": "Cliff",
+      "id": "nden00z",
+      "props": {
+        "position": [
+          0,
+          -15.2,
+          45
+        ],
+        "radius": 13,
+        "topRadius": 9,
+        "height": 14.5,
+        "segments": 9,
+        "rough": 0.35,
+        "color": "#767268",
+        "seed": 33
+      }
+    },
+    {
+      "type": "Slab",
+      "id": "nsr3hwp",
+      "props": {
+        "position": [
+          0,
+          0.0,
+          36
+        ],
+        "size": [
+          12,
+          32
+        ],
+        "thickness": 0.5,
+        "color": "#5e7f42"
+      }
+    },
+    {
+      "type": "Road",
+      "id": "n03g4hf",
       "props": {
         "position": [
           0,
           0.02,
-          9
+          40
         ],
-        "length": 9,
-        "width": 2.2,
-        "seed": 6
+        "length": 34,
+        "width": 4,
+        "color": "#9a948a",
+        "kerbColor": "#b5afa2"
+      }
+    },
+    {
+      "type": "Road",
+      "id": "npqxo82",
+      "props": {
+        "position": [
+          0,
+          0.02,
+          71
+        ],
+        "length": 28,
+        "width": 4,
+        "color": "#9a948a",
+        "kerbColor": "#b5afa2"
+      }
+    },
+    {
+      "type": "Slab",
+      "id": "ntaf2zn",
+      "props": {
+        "position": [
+          0,
+          0.12,
+          88
+        ],
+        "shape": "disc",
+        "size": [
+          11,
+          11
+        ],
+        "thickness": 0.12,
+        "color": "#8b8578"
       }
     },
     {
       "type": "Arch",
-      "id": "nez9q6o",
+      "id": "nfc5spq",
       "props": {
         "position": [
-          6.789,
-          0.052,
-          40.091
-        ],
-        "width": 3.2,
-        "height": 2.8,
-        "depth": 1.2,
-        "rotation": [
           0,
-          0,
-          0
-        ]
-      }
-    },
-    {
-      "type": "Pillar",
-      "id": "nylfjyp",
-      "props": {
-        "position": [
-          29.376,
-          0.048,
-          -12.55
-        ],
-        "height": 3.2,
-        "radius": 0.3,
-        "rotation": [
-          0,
-          0,
-          0
-        ]
-      }
-    },
-    {
-      "type": "Pillar",
-      "id": "nn0roa7",
-      "props": {
-        "position": [
-          29.19,
-          0.04,
-          12.108
-        ],
-        "height": 3.2,
-        "radius": 0.3,
-        "rotation": [
-          0,
-          0,
-          0
-        ]
-      }
-    },
-    {
-      "type": "Fence",
-      "id": "n94rud2",
-      "props": {
-        "position": [
-          -4,
           0.02,
-          -7
+          24.5
         ],
-        "length": 8,
-        "rails": 3,
-        "seed": 13
+        "width": 4.6,
+        "height": 3.2,
+        "depth": 0.7,
+        "thickness": 0.5,
+        "color": "#ece8df"
+      }
+    },
+    {
+      "type": "Lamp",
+      "id": "n8ntfc7",
+      "props": {
+        "position": [
+          3.4,
+          0.0,
+          24.5
+        ]
+      }
+    },
+    {
+      "type": "Lamp",
+      "id": "nw8mr68",
+      "props": {
+        "position": [
+          -3.4,
+          0.0,
+          24.5
+        ]
+      }
+    },
+    {
+      "type": "Cliff",
+      "id": "n80i0tu",
+      "props": {
+        "position": [
+          34,
+          -15.2,
+          14
+        ],
+        "radius": 42,
+        "topRadius": 10,
+        "height": 14.2,
+        "segments": 12,
+        "rough": 0.18,
+        "color": "#d8c79a",
+        "seed": 41
+      }
+    },
+    {
+      "type": "Shore",
+      "id": "np66ds7",
+      "props": {
+        "position": [
+          56,
+          -13.55,
+          12
+        ],
+        "size": [
+          50,
+          56
+        ]
+      }
+    },
+    {
+      "type": "Palm",
+      "id": "nckz8nj",
+      "props": {
+        "position": [
+          70,
+          -13.45,
+          -8
+        ],
+        "seed": 15,
+        "height": 5.4,
+        "lean": 0.24,
+        "rotation": [
+          0,
+          1.1,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Palm",
+      "id": "n6fg9b0",
+      "props": {
+        "position": [
+          76,
+          -13.45,
+          20
+        ],
+        "seed": 16,
+        "height": 6.2,
+        "lean": 0.2,
+        "rotation": [
+          0,
+          3.9,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Palm",
+      "id": "njilssq",
+      "props": {
+        "position": [
+          68,
+          -13.45,
+          32
+        ],
+        "seed": 18,
+        "height": 5.0,
+        "lean": 0.26,
+        "rotation": [
+          0,
+          5.2,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Campfire",
+      "id": "na49vjq",
+      "props": {
+        "position": [
+          74,
+          -13.4,
+          10
+        ],
+        "radius": 0.7,
+        "seed": 19
+      }
+    },
+    {
+      "type": "Rocks",
+      "id": "nhf94ka",
+      "props": {
+        "position": [
+          79,
+          -13.4,
+          0
+        ],
+        "count": 5,
+        "spread": 2.4,
+        "seed": 44
+      }
+    },
+    {
+      "type": "Sailboat",
+      "id": "nryg851",
+      "props": {
+        "position": [
+          88,
+          -14.0,
+          24
+        ],
+        "rotation": [
+          0,
+          -0.8,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Birds",
+      "id": "nabhx9a",
+      "props": {
+        "position": [
+          40,
+          10,
+          20
+        ],
+        "count": 5,
+        "area": 18,
+        "height": 3,
+        "speed": 1,
+        "seed": 2
+      }
+    },
+    {
+      "type": "Palm",
+      "id": "ne1jekc",
+      "props": {
+        "position": [
+          5,
+          0.0,
+          58
+        ],
+        "seed": 21,
+        "height": 6.0,
+        "lean": 0.18,
+        "rotation": [
+          0,
+          0.7,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Palm",
+      "id": "nvopyqd",
+      "props": {
+        "position": [
+          -5,
+          0.0,
+          58
+        ],
+        "seed": 22,
+        "height": 5.6,
+        "lean": 0.2,
+        "rotation": [
+          0,
+          2.6,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Palm",
+      "id": "nge5p6x",
+      "props": {
+        "position": [
+          5,
+          0.0,
+          70
+        ],
+        "seed": 23,
+        "height": 6.4,
+        "lean": 0.16,
+        "rotation": [
+          0,
+          4.2,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Palm",
+      "id": "ndkd89f",
+      "props": {
+        "position": [
+          -5,
+          0.0,
+          70
+        ],
+        "seed": 24,
+        "height": 5.8,
+        "lean": 0.22,
+        "rotation": [
+          0,
+          1.4,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Trees",
+      "id": "n9u8lgc",
+      "props": {
+        "position": [
+          -15,
+          0.0,
+          60
+        ],
+        "seed": 34
+      }
+    },
+    {
+      "type": "Trees",
+      "id": "n7on4hc",
+      "props": {
+        "position": [
+          18,
+          0.0,
+          64
+        ],
+        "seed": 35
+      }
+    },
+    {
+      "type": "Trees",
+      "id": "n6q347i",
+      "props": {
+        "position": [
+          -32,
+          0.0,
+          84
+        ],
+        "seed": 36
+      }
+    },
+    {
+      "type": "Trees",
+      "id": "ncwgqe7",
+      "props": {
+        "position": [
+          35,
+          0.0,
+          100
+        ],
+        "seed": 37
+      }
+    },
+    {
+      "type": "Trees",
+      "id": "nfwten2",
+      "props": {
+        "position": [
+          -14,
+          0.0,
+          118
+        ],
+        "seed": 38
+      }
+    },
+    {
+      "type": "Trees",
+      "id": "n20o1ao",
+      "props": {
+        "position": [
+          22,
+          0.0,
+          124
+        ],
+        "seed": 39
+      }
+    },
+    {
+      "type": "Bush",
+      "id": "n4cghme",
+      "props": {
+        "position": [
+          -9,
+          0.0,
+          66
+        ],
+        "radius": 1.2,
+        "seed": 27
+      }
+    },
+    {
+      "type": "Bush",
+      "id": "nqgyrsj",
+      "props": {
+        "position": [
+          10,
+          0.0,
+          80
+        ],
+        "radius": 1.2,
+        "seed": 28
+      }
+    },
+    {
+      "type": "Bush",
+      "id": "n9a9zhj",
+      "props": {
+        "position": [
+          -26,
+          0.0,
+          100
+        ],
+        "radius": 1.2,
+        "seed": 29
+      }
+    },
+    {
+      "type": "Grass",
+      "id": "nkbtk3c",
+      "props": {
+        "position": [
+          -14,
+          0.0,
+          76
+        ],
+        "area": [
+          20,
+          24
+        ],
+        "count": 420,
+        "seed": 18
+      }
+    },
+    {
+      "type": "Grass",
+      "id": "nticdn3",
+      "props": {
+        "position": [
+          15,
+          0.0,
+          82
+        ],
+        "area": [
+          20,
+          24
+        ],
+        "count": 420,
+        "seed": 19
+      }
+    },
+    {
+      "type": "Grass",
+      "id": "nouwjty",
+      "props": {
+        "position": [
+          0,
+          0.0,
+          112
+        ],
+        "area": [
+          34,
+          24
+        ],
+        "count": 520,
+        "seed": 20
+      }
+    },
+    {
+      "type": "Rocks",
+      "id": "np6bu32",
+      "props": {
+        "position": [
+          -55,
+          -0.5,
+          80
+        ],
+        "count": 6,
+        "spread": 2.6,
+        "seed": 45
+      }
+    },
+    {
+      "type": "Rocks",
+      "id": "nldvng7",
+      "props": {
+        "position": [
+          52,
+          -0.4,
+          128
+        ],
+        "count": 5,
+        "spread": 2.4,
+        "seed": 46
+      }
+    },
+    {
+      "type": "Road",
+      "id": "ncdtcnz",
+      "props": {
+        "position": [
+          0,
+          0.02,
+          8.5
+        ],
+        "length": 29,
+        "width": 4,
+        "color": "#9a948a",
+        "kerbColor": "#b5afa2"
       }
     },
     {
       "type": "Hedge",
-      "id": "nvefszy",
+      "id": "nmdxuqt",
       "props": {
         "position": [
-          1.492,
-          -0.018,
-          -23.967
+          3.4,
+          0.0,
+          19
         ],
-        "length": 10,
+        "length": 8,
         "rotation": [
           0,
           1.571,
@@ -193,215 +774,658 @@
       }
     },
     {
-      "type": "House",
-      "id": "ng95lyn",
-      "props": {
-        "position": [
-          0,
-          0.02,
-          0
-        ],
-        "size": [
-          9,
-          9
-        ],
-        "height": 3
-      }
-    },
-    {
-      "type": "Rug",
-      "id": "nnlymiz",
-      "props": {
-        "position": [
-          0,
-          0.03,
-          -0.8
-        ],
-        "size": [
-          4.5,
-          3
-        ],
-        "seed": 7
-      }
-    },
-    {
-      "type": "Table",
-      "id": "nc49akz",
-      "props": {
-        "position": [
-          0,
-          0.02,
-          -0.8
-        ]
-      }
-    },
-    {
-      "type": "Chair",
-      "id": "nztc6nl",
-      "props": {
-        "position": [
-          0,
-          0.02,
-          0.3
-        ]
-      }
-    },
-    {
-      "type": "Chair",
-      "id": "n723dlf",
-      "props": {
-        "position": [
-          0,
-          0.02,
-          -1.9
-        ],
-        "rotation": [
-          0,
-          3.141592653589793,
-          0
-        ]
-      }
-    },
-    {
-      "type": "Bookshelf",
-      "id": "nafjl61",
+      "type": "Hedge",
+      "id": "nvuigto",
       "props": {
         "position": [
           -3.4,
-          1.04,
-          -3.7
+          0.0,
+          19
         ],
-        "seed": 42,
-        "fill": 0.85
+        "length": 8,
+        "rotation": [
+          0,
+          1.571,
+          0
+        ],
+        "seed": 22
       }
     },
     {
-      "type": "Shelf",
-      "id": "noywoyu",
+      "type": "Slab",
+      "id": "n2tdrc1",
       "props": {
         "position": [
-          -4.1,
-          0.02,
-          1.4
+          17,
+          0.12,
+          10
         ],
+        "shape": "disc",
+        "size": [
+          7.5,
+          7.5
+        ],
+        "thickness": 0.12,
+        "color": "#8b8578"
+      }
+    },
+    {
+      "type": "Floor",
+      "id": "n9faso7",
+      "props": {
+        "position": [
+          16.2,
+          0.13,
+          10
+        ],
+        "size": [
+          0.45,
+          2.6
+        ],
+        "thickness": 0.06,
+        "color": "#e8e4dc"
+      }
+    },
+    {
+      "type": "Floor",
+      "id": "nyqwa96",
+      "props": {
+        "position": [
+          17.8,
+          0.13,
+          10
+        ],
+        "size": [
+          0.45,
+          2.6
+        ],
+        "thickness": 0.06,
+        "color": "#e8e4dc"
+      }
+    },
+    {
+      "type": "Floor",
+      "id": "ngt1b0p",
+      "props": {
+        "position": [
+          17,
+          0.13,
+          10
+        ],
+        "size": [
+          1.15,
+          0.45
+        ],
+        "thickness": 0.06,
+        "color": "#e8e4dc"
+      }
+    },
+    {
+      "type": "Slab",
+      "id": "ny02c67",
+      "props": {
+        "position": [
+          0,
+          0.4,
+          -16.5
+        ],
+        "size": [
+          30,
+          17
+        ],
+        "thickness": 0.4
+      }
+    },
+    {
+      "type": "CurvedWall",
+      "id": "n5pp6wo",
+      "props": {
+        "position": [
+          -3.5,
+          0.4,
+          -14.5
+        ],
+        "radius": 6.5,
+        "arc": 4.21,
+        "height": 3.2,
+        "style": "glass",
         "rotation": [
           0,
-          1.5707963267948966,
+          3.142,
           0
         ]
       }
     },
     {
-      "type": "Lamp",
-      "id": "nij8i73",
+      "type": "CurvedWall",
+      "id": "n5n1cj1",
       "props": {
         "position": [
-          3.4,
-          0.02,
-          -3.4
+          -3.5,
+          0.4,
+          -14.5
+        ],
+        "radius": 6.5,
+        "arc": 0.95,
+        "height": 3.2,
+        "rotation": [
+          0,
+          0.56,
+          0
         ]
       }
     },
     {
-      "type": "Clock",
-      "id": "nqv1drj",
+      "type": "CurvedWall",
+      "id": "nvx0m6m",
       "props": {
         "position": [
-          1.6,
-          2.2,
-          -4.35
+          -3.5,
+          0.4,
+          -14.5
         ],
-        "radius": 0.5
+        "radius": 6.5,
+        "arc": 0.95,
+        "height": 3.2,
+        "rotation": [
+          0,
+          -0.56,
+          0
+        ]
       }
     },
     {
-      "type": "Plant",
-      "id": "ncd8wq7",
+      "type": "Door",
+      "id": "n13qrce",
       "props": {
         "position": [
-          3.6,
-          0.02,
-          3.4
-        ],
-        "height": 1.2,
-        "seed": 31
-      }
-    },
-    {
-      "type": "Bed",
-      "id": "nkn74dh",
-      "props": {
-        "position": [
-          -3,
-          0.02,
-          3
+          -3.5,
+          0.4,
+          -8.0
         ],
         "rotation": [
           0,
-          1.5707963267948966,
+          0,
+          0
+        ],
+        "openAngle": 1.9
+      }
+    },
+    {
+      "type": "Floor",
+      "id": "nexy83t",
+      "props": {
+        "position": [
+          -3.5,
+          0.2,
+          -7.3
+        ],
+        "size": [
+          3,
+          1.4
+        ],
+        "thickness": 0.2,
+        "color": "#c6c0b4"
+      }
+    },
+    {
+      "type": "Slab",
+      "id": "ntqhvfl",
+      "props": {
+        "position": [
+          -3.5,
+          3.95,
+          -14.5
+        ],
+        "shape": "disc",
+        "size": [
+          17.5,
+          17.5
+        ],
+        "thickness": 0.35
+      }
+    },
+    {
+      "type": "CurvedWall",
+      "id": "ng7d7y9",
+      "props": {
+        "position": [
+          -3.5,
+          3.95,
+          -14.5
+        ],
+        "radius": 8.35,
+        "arc": 5.78,
+        "height": 1.0,
+        "style": "glass",
+        "rotation": [
+          0,
+          3.94,
+          0
+        ]
+      }
+    },
+    {
+      "type": "CurvedWall",
+      "id": "n74co4q",
+      "props": {
+        "position": [
+          -1.5,
+          3.95,
+          -15.0
+        ],
+        "radius": 4.6,
+        "arc": 3.6,
+        "height": 2.9,
+        "style": "glass",
+        "rotation": [
+          0,
+          3.142,
+          0
+        ]
+      }
+    },
+    {
+      "type": "CurvedWall",
+      "id": "nclygno",
+      "props": {
+        "position": [
+          -1.5,
+          3.95,
+          -15.0
+        ],
+        "radius": 4.6,
+        "arc": 2.3,
+        "height": 2.9,
+        "rotation": [
+          0,
+          0.2,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Slab",
+      "id": "ndcq73l",
+      "props": {
+        "position": [
+          -1.5,
+          7.2,
+          -15.0
+        ],
+        "shape": "disc",
+        "size": [
+          11.5,
+          11.5
+        ],
+        "thickness": 0.35
+      }
+    },
+    {
+      "type": "Staircase",
+      "id": "nwew2jm",
+      "props": {
+        "position": [
+          7.5,
+          0.4,
+          -8.7
+        ],
+        "rotation": [
+          0,
+          -1.571,
+          0
+        ],
+        "steps": 11,
+        "totalHeight": 3.55,
+        "width": 1.3,
+        "depth": 5.0,
+        "color": "#c6c0b4"
+      }
+    },
+    {
+      "type": "CurvedWall",
+      "id": "n288gdn",
+      "props": {
+        "position": [
+          10.5,
+          0.4,
+          -16.5
+        ],
+        "radius": 4.5,
+        "arc": 5.6,
+        "height": 3.1,
+        "style": "glass",
+        "rotation": [
+          0,
+          1.571,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Slab",
+      "id": "nlihv5a",
+      "props": {
+        "position": [
+          10.5,
+          3.9,
+          -16.5
+        ],
+        "shape": "disc",
+        "size": [
+          11.5,
+          11.5
+        ],
+        "thickness": 0.4
+      }
+    },
+    {
+      "type": "Wall",
+      "id": "nckcp6g",
+      "props": {
+        "position": [
+          4.65,
+          0.4,
+          -13.55
+        ],
+        "width": 3.6,
+        "height": 2.9,
+        "rotation": [
+          0,
+          0.142,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Wall",
+      "id": "nfxid4t",
+      "props": {
+        "position": [
+          4.33,
+          0.4,
+          -15.73
+        ],
+        "width": 3.6,
+        "height": 2.9,
+        "rotation": [
+          0,
+          0.142,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Floor",
+      "id": "nwy8qaf",
+      "props": {
+        "position": [
+          4.49,
+          3.3,
+          -14.64
+        ],
+        "size": [
+          3.8,
+          2.6
+        ],
+        "rotation": [
+          0,
+          0.142,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Floor",
+      "id": "nh84ofs",
+      "props": {
+        "position": [
+          -18.5,
+          1.55,
+          -7.0
+        ],
+        "size": [
+          13,
+          9
+        ],
+        "thickness": 0.25,
+        "opening": {
+          "x": -0.5,
+          "z": -0.5,
+          "width": 6.5,
+          "depth": 4
+        },
+        "color": "#ece8df"
+      }
+    },
+    {
+      "type": "Pool",
+      "id": "n7k6lvr",
+      "props": {
+        "position": [
+          -19,
+          1.55,
+          -7.5
+        ],
+        "size": [
+          6.5,
+          4
+        ],
+        "depth": 1.4
+      }
+    },
+    {
+      "type": "Pillar",
+      "id": "noweb94",
+      "props": {
+        "position": [
+          -23.5,
+          0,
+          -10.7
+        ],
+        "height": 1.35,
+        "radius": 0.25,
+        "color": "#d8d2c6"
+      }
+    },
+    {
+      "type": "Pillar",
+      "id": "ntk5yk5",
+      "props": {
+        "position": [
+          -14,
+          0,
+          -10.7
+        ],
+        "height": 1.35,
+        "radius": 0.25,
+        "color": "#d8d2c6"
+      }
+    },
+    {
+      "type": "Pillar",
+      "id": "n7pwy6t",
+      "props": {
+        "position": [
+          -23.5,
+          0,
+          -3.3
+        ],
+        "height": 1.35,
+        "radius": 0.25,
+        "color": "#d8d2c6"
+      }
+    },
+    {
+      "type": "Pillar",
+      "id": "nk1bgu2",
+      "props": {
+        "position": [
+          -14,
+          0,
+          -3.3
+        ],
+        "height": 1.35,
+        "radius": 0.25,
+        "color": "#d8d2c6"
+      }
+    },
+    {
+      "type": "CurvedWall",
+      "id": "nbzcx7r",
+      "props": {
+        "position": [
+          -20.5,
+          1.55,
+          -7.0
+        ],
+        "radius": 4.3,
+        "arc": 3.142,
+        "height": 1.0,
+        "style": "glass",
+        "rotation": [
+          0,
+          -1.571,
           0
         ]
       }
     },
     {
       "type": "Staircase",
-      "id": "nprt8pr",
+      "id": "n2sz6ha",
       "props": {
         "position": [
-          3.4,
-          0.02,
-          -4
+          -9.4,
+          0.0,
+          -7
         ],
-        "steps": 6,
-        "totalHeight": 1.5,
-        "width": 1.2,
-        "depth": 2.4
+        "rotation": [
+          0,
+          -1.571,
+          0
+        ],
+        "steps": 5,
+        "totalHeight": 1.55,
+        "width": 1.8,
+        "depth": 2.6,
+        "color": "#c6c0b4"
       }
     },
     {
-      "type": "Well",
-      "id": "n107cbn",
+      "type": "Bench",
+      "id": "n73gnog",
       "props": {
         "position": [
-          -6.512,
-          -0.043,
-          -19.596
+          -17.2,
+          1.55,
+          -4.2
         ],
-        "radius": 1.1,
+        "back": true,
         "rotation": [
           0,
+          3.142,
+          0
+        ],
+        "color": "#e7e2d8"
+      }
+    },
+    {
+      "type": "Bench",
+      "id": "npn8kaa",
+      "props": {
+        "position": [
+          -14.9,
+          1.55,
+          -4.2
+        ],
+        "back": true,
+        "rotation": [
           0,
+          3.142,
+          0
+        ],
+        "color": "#e7e2d8"
+      }
+    },
+    {
+      "type": "Lamp",
+      "id": "ndh1vff",
+      "props": {
+        "position": [
+          -13.2,
+          1.55,
+          -10.4
+        ]
+      }
+    },
+    {
+      "type": "Rug",
+      "id": "n8wj20x",
+      "props": {
+        "position": [
+          -3.5,
+          0.43,
+          -15.0
+        ],
+        "size": [
+          5,
+          3.5
+        ],
+        "seed": 7
+      }
+    },
+    {
+      "type": "Table",
+      "id": "ntldgq2",
+      "props": {
+        "position": [
+          -3.5,
+          0.4,
+          -15.7
+        ]
+      }
+    },
+    {
+      "type": "Chair",
+      "id": "nmjxg5x",
+      "props": {
+        "position": [
+          -2.4,
+          0.4,
+          -14.7
+        ],
+        "rotation": [
+          0,
+          -2.4,
           0
         ]
       }
     },
     {
-      "type": "Fountain",
-      "id": "nuc5znq",
+      "type": "Chair",
+      "id": "no714j2",
       "props": {
         "position": [
-          8.44,
-          -0.042,
-          20.733
+          -4.8,
+          0.4,
+          -16.7
         ],
-        "radius": 1.4,
         "rotation": [
           0,
-          0,
+          0.7,
           0
         ]
       }
     },
     {
       "type": "Bench",
-      "id": "nsrthfs",
+      "id": "n25cmls",
       "props": {
         "position": [
-          23.701,
-          -0.029,
-          11.383
+          -2.9,
+          0.4,
+          -18.4
         ],
-        "length": 2,
         "back": true,
         "rotation": [
           0,
@@ -411,204 +1435,457 @@
       }
     },
     {
-      "type": "Crate",
-      "id": "n29ljzl",
+      "type": "Bookshelf",
+      "id": "nbmzu17",
       "props": {
         "position": [
-          5.384,
-          1.93,
-          0.426
+          -0.525,
+          0.4,
+          -9.755
         ],
-        "size": 0.8,
-        "seed": 17,
         "rotation": [
           0,
+          3.702,
+          0
+        ],
+        "seed": 42,
+        "fill": 0.85
+      }
+    },
+    {
+      "type": "Bookshelf",
+      "id": "nob43az",
+      "props": {
+        "position": [
+          -6.475,
+          0.4,
+          -9.755
+        ],
+        "rotation": [
           0,
+          2.582,
+          0
+        ],
+        "seed": 43,
+        "fill": 0.85
+      }
+    },
+    {
+      "type": "Lamp",
+      "id": "ny90coq",
+      "props": {
+        "position": [
+          -8.7,
+          0.4,
+          -12.3
+        ]
+      }
+    },
+    {
+      "type": "Plant",
+      "id": "nhucvpz",
+      "props": {
+        "position": [
+          1.1,
+          0.4,
+          -11.7
+        ],
+        "height": 1.3,
+        "seed": 31
+      }
+    },
+    {
+      "type": "Bed",
+      "id": "na2ifk2",
+      "props": {
+        "position": [
+          -3.2,
+          3.95,
+          -16.0
+        ],
+        "rotation": [
+          0,
+          1.571,
           0
         ]
       }
     },
     {
-      "type": "Barrel",
-      "id": "ni01tj2",
+      "type": "Rug",
+      "id": "nwtkrhb",
       "props": {
         "position": [
-          5.6,
-          0.02,
-          3.6
-        ],
-        "radius": 0.45,
-        "height": 1
-      }
-    },
-    {
-      "type": "Campfire",
-      "id": "nvaikgo",
-      "props": {
-        "position": [
-          6.662,
-          0.055,
-          12.594
-        ],
-        "radius": 0.8,
-        "seed": 19,
-        "rotation": [
-          0,
-          0,
-          0
-        ]
-      }
-    },
-    {
-      "type": "Bush",
-      "id": "ncnn76k",
-      "props": {
-        "position": [
-          -9.844,
-          -0.003,
-          19.28
-        ],
-        "radius": 1.2,
-        "seed": 23,
-        "rotation": [
-          0,
-          0,
-          0
-        ]
-      }
-    },
-    {
-      "type": "Grass",
-      "id": "n8ujhbr",
-      "props": {
-        "position": [
-          0,
-          0.02,
-          11
-        ],
-        "area": [
-          30,
-          12
-        ],
-        "count": 900,
-        "seed": 3
-      }
-    },
-    {
-      "type": "Flowers",
-      "id": "nlnh93o",
-      "props": {
-        "position": [
-          -7,
-          0.02,
-          10
-        ],
-        "area": [
-          6,
-          4
-        ],
-        "count": 40,
-        "seed": 27
-      }
-    },
-    {
-      "type": "Shore",
-      "id": "n2msek5",
-      "props": {
-        "position": [
-          18,
-          0.03,
-          0
+          -1.0,
+          3.98,
+          -14.5
         ],
         "size": [
-          24,
-          26
-        ]
-      }
-    },
-    {
-      "type": "Lake",
-      "id": "ns16lob",
-      "props": {
-        "position": [
-          18.615,
-          0.12,
-          0
+          3.5,
+          2.5
         ],
-        "size": [
-          15,
-          17
-        ],
-        "sunPosition": [
-          60,
-          25,
-          30
-        ],
-        "rotation": [
-          0,
-          0,
-          0
-        ]
-      }
-    },
-    {
-      "type": "Bridge",
-      "id": "novdizu",
-      "props": {
-        "position": [
-          13.91,
-          0.059,
-          1.471
-        ],
-        "length": 7,
-        "width": 2.4,
-        "arch": 0.5,
-        "rails": true,
-        "seed": 2,
-        "rotation": [
-          0,
-          0,
-          0
-        ]
-      }
-    },
-    {
-      "type": "Rocks",
-      "id": "nsctgtu",
-      "props": {
-        "position": [
-          9,
-          0.02,
-          -8
-        ],
-        "count": 7,
-        "spread": 3.5,
         "seed": 11
       }
     },
     {
-      "type": "Rocks",
-      "id": "n3kw0ql",
+      "type": "Plant",
+      "id": "nk3xrru",
       "props": {
         "position": [
-          -10,
-          0.02,
-          6
+          1.5,
+          3.95,
+          -17.6
         ],
-        "count": 5,
-        "spread": 2.5,
-        "size": 0.8,
-        "seed": 22
+        "height": 1.1,
+        "seed": 33
+      }
+    },
+    {
+      "type": "Lamp",
+      "id": "ntmk9kc",
+      "props": {
+        "position": [
+          1.9,
+          3.95,
+          -12.8
+        ]
+      }
+    },
+    {
+      "type": "Table",
+      "id": "n4cpuec",
+      "props": {
+        "position": [
+          10.5,
+          0.4,
+          -16.5
+        ]
+      }
+    },
+    {
+      "type": "Chair",
+      "id": "n6vsgja",
+      "props": {
+        "position": [
+          11.7,
+          0.4,
+          -15.6
+        ],
+        "rotation": [
+          0,
+          -2.6,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Chair",
+      "id": "nvn5n24",
+      "props": {
+        "position": [
+          9.3,
+          0.4,
+          -17.5
+        ],
+        "rotation": [
+          0,
+          0.5,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Rug",
+      "id": "nkqwzz1",
+      "props": {
+        "position": [
+          10.5,
+          0.43,
+          -16.5
+        ],
+        "size": [
+          4,
+          4
+        ],
+        "seed": 13
+      }
+    },
+    {
+      "type": "Plant",
+      "id": "ndgpx3l",
+      "props": {
+        "position": [
+          13.1,
+          0.4,
+          -19.1
+        ],
+        "height": 1.2,
+        "seed": 35
+      }
+    },
+    {
+      "type": "Bench",
+      "id": "n9xbb45",
+      "props": {
+        "position": [
+          7,
+          0.4,
+          -23
+        ],
+        "back": true,
+        "rotation": [
+          0,
+          3.142,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Lamp",
+      "id": "n5ghn9q",
+      "props": {
+        "position": [
+          13.5,
+          0.4,
+          -21
+        ]
+      }
+    },
+    {
+      "type": "Palm",
+      "id": "naixdmj",
+      "props": {
+        "position": [
+          5,
+          0.0,
+          20
+        ],
+        "seed": 3,
+        "height": 6.2,
+        "lean": 0.16,
+        "rotation": [
+          0,
+          0.4,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Palm",
+      "id": "njwkv51",
+      "props": {
+        "position": [
+          -5,
+          0.0,
+          20
+        ],
+        "seed": 4,
+        "height": 5.6,
+        "lean": 0.2,
+        "rotation": [
+          0,
+          2.1,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Palm",
+      "id": "nucgcj5",
+      "props": {
+        "position": [
+          5,
+          0.0,
+          12
+        ],
+        "seed": 5,
+        "height": 6.8,
+        "lean": 0.14,
+        "rotation": [
+          0,
+          1.2,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Palm",
+      "id": "no359ld",
+      "props": {
+        "position": [
+          -5,
+          0.0,
+          12
+        ],
+        "seed": 6,
+        "height": 5.9,
+        "lean": 0.18,
+        "rotation": [
+          0,
+          4.4,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Palm",
+      "id": "n21pl3k",
+      "props": {
+        "position": [
+          6,
+          0.0,
+          -2
+        ],
+        "seed": 7,
+        "height": 6.4,
+        "lean": 0.2,
+        "rotation": [
+          0,
+          0.9,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Palm",
+      "id": "nrhy118",
+      "props": {
+        "position": [
+          -6.5,
+          0.0,
+          -3
+        ],
+        "seed": 8,
+        "height": 7.0,
+        "lean": 0.16,
+        "rotation": [
+          0,
+          2.8,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Palm",
+      "id": "n10y79w",
+      "props": {
+        "position": [
+          -22.5,
+          0.0,
+          -3
+        ],
+        "seed": 9,
+        "height": 5.4,
+        "lean": 0.22,
+        "rotation": [
+          0,
+          5.3,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Palm",
+      "id": "nvux8a8",
+      "props": {
+        "position": [
+          -23.2,
+          0.0,
+          -10
+        ],
+        "seed": 10,
+        "height": 6.6,
+        "lean": 0.19,
+        "rotation": [
+          0,
+          1.7,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Palm",
+      "id": "nvqa1y5",
+      "props": {
+        "position": [
+          -13.8,
+          0.0,
+          -12.2
+        ],
+        "seed": 11,
+        "height": 5.8,
+        "lean": 0.17,
+        "rotation": [
+          0,
+          3.6,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Palm",
+      "id": "nn0wuha",
+      "props": {
+        "position": [
+          21.5,
+          0.0,
+          5.5
+        ],
+        "seed": 12,
+        "height": 5.2,
+        "lean": 0.2,
+        "rotation": [
+          0,
+          0.2,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Palm",
+      "id": "nwgvmsb",
+      "props": {
+        "position": [
+          13,
+          0.0,
+          15.5
+        ],
+        "seed": 13,
+        "height": 6.0,
+        "lean": 0.15,
+        "rotation": [
+          0,
+          2.5,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Palm",
+      "id": "nyoy5fw",
+      "props": {
+        "position": [
+          16,
+          0.0,
+          -9.5
+        ],
+        "seed": 14,
+        "height": 6.3,
+        "lean": 0.18,
+        "rotation": [
+          0,
+          4.1,
+          0
+        ]
       }
     },
     {
       "type": "Trees",
-      "id": "n5mm523",
+      "id": "ncv6p7o",
       "props": {
         "position": [
-          -12,
-          0.02,
-          -7
+          -21,
+          0.0,
+          6
         ],
         "seed": 4,
         "segmentLength": 0.8
@@ -616,40 +1893,239 @@
     },
     {
       "type": "Trees",
-      "id": "n8r3pnp",
+      "id": "nfvjwtq",
       "props": {
         "position": [
-          13,
-          0.02,
-          11
+          22,
+          0.0,
+          -2
         ],
         "seed": 8
       }
     },
     {
       "type": "Trees",
-      "id": "nmzj23w",
+      "id": "n7nc7ht",
       "props": {
         "position": [
-          -15,
-          0.02,
-          13
+          18,
+          0.0,
+          16
         ],
         "seed": 15,
         "segmentLength": 0.9
       }
     },
     {
+      "type": "Bush",
+      "id": "nsk4nlv",
+      "props": {
+        "position": [
+          4.5,
+          0.0,
+          3
+        ],
+        "radius": 1.1,
+        "seed": 23
+      }
+    },
+    {
+      "type": "Bush",
+      "id": "ntzds4j",
+      "props": {
+        "position": [
+          -4.8,
+          0.0,
+          2.5
+        ],
+        "radius": 1.3,
+        "seed": 24
+      }
+    },
+    {
+      "type": "Bush",
+      "id": "nk2j25c",
+      "props": {
+        "position": [
+          19,
+          0.0,
+          -3.5
+        ],
+        "radius": 1.0,
+        "seed": 25
+      }
+    },
+    {
+      "type": "Bush",
+      "id": "ny1haco",
+      "props": {
+        "position": [
+          12,
+          0.0,
+          18
+        ],
+        "radius": 1.2,
+        "seed": 26
+      }
+    },
+    {
+      "type": "Flowers",
+      "id": "nmzmqr9",
+      "props": {
+        "position": [
+          -8,
+          0.0,
+          6
+        ],
+        "area": [
+          5,
+          3
+        ],
+        "count": 36,
+        "seed": 27
+      }
+    },
+    {
+      "type": "Flowers",
+      "id": "nrsczhf",
+      "props": {
+        "position": [
+          8.5,
+          0.0,
+          5.5
+        ],
+        "area": [
+          5,
+          3
+        ],
+        "count": 32,
+        "seed": 28
+      }
+    },
+    {
+      "type": "Grass",
+      "id": "namkj0s",
+      "props": {
+        "position": [
+          11.5,
+          0.0,
+          14
+        ],
+        "area": [
+          19,
+          16
+        ],
+        "count": 500,
+        "seed": 3
+      }
+    },
+    {
+      "type": "Grass",
+      "id": "n2n8hh3",
+      "props": {
+        "position": [
+          -11,
+          0.0,
+          13
+        ],
+        "area": [
+          18,
+          14
+        ],
+        "count": 420,
+        "seed": 6
+      }
+    },
+    {
+      "type": "Grass",
+      "id": "ncdq7qq",
+      "props": {
+        "position": [
+          20,
+          0.0,
+          -8
+        ],
+        "area": [
+          8,
+          10
+        ],
+        "count": 160,
+        "seed": 12
+      }
+    },
+    {
+      "type": "Grass",
+      "id": "n2dvoxf",
+      "props": {
+        "position": [
+          -9,
+          0.0,
+          -1
+        ],
+        "area": [
+          10,
+          6
+        ],
+        "count": 140,
+        "seed": 16
+      }
+    },
+    {
+      "type": "Rocks",
+      "id": "nldnzrc",
+      "props": {
+        "position": [
+          23,
+          -0.6,
+          -14
+        ],
+        "count": 5,
+        "spread": 2.5,
+        "seed": 11
+      }
+    },
+    {
+      "type": "Rocks",
+      "id": "nzapqt1",
+      "props": {
+        "position": [
+          -24,
+          -0.8,
+          12
+        ],
+        "count": 6,
+        "spread": 2.5,
+        "size": 0.9,
+        "seed": 22
+      }
+    },
+    {
+      "type": "Sailboat",
+      "id": "npdyxve",
+      "props": {
+        "position": [
+          -55,
+          -14.0,
+          -32
+        ],
+        "rotation": [
+          0,
+          0.6,
+          0
+        ]
+      }
+    },
+    {
       "type": "Birds",
-      "id": "nu0gins",
+      "id": "njt1xsz",
       "props": {
         "position": [
           0,
-          13,
-          0
+          14,
+          -8
         ],
-        "count": 7,
-        "area": 16,
+        "count": 6,
+        "area": 22,
         "height": 3,
         "speed": 1,
         "seed": 1
@@ -657,15 +2133,15 @@
     },
     {
       "type": "Player",
-      "id": "nmb1him",
+      "id": "nbgyh7i",
       "props": {
         "position": [
-          -1,
-          3,
-          13
+          0,
+          1.6,
+          30
         ],
         "view": "first",
-        "yaw": 3.141592653589793
+        "yaw": 3.142
       }
     }
   ]

@@ -13,9 +13,11 @@ import { Bridge } from './runek/Bridge'
 import { Bush } from './runek/Bush'
 import { Campfire } from './runek/Campfire'
 import { Chair } from './runek/Chair'
+import { Cliff } from './runek/Cliff'
 import { Clock } from './runek/Clock'
 import { Clouds } from './runek/Clouds'
 import { Crate } from './runek/Crate'
+import { CurvedWall } from './runek/CurvedWall'
 import { Door } from './runek/Door'
 import { Fence } from './runek/Fence'
 import { Floor } from './runek/Floor'
@@ -27,18 +29,24 @@ import { House } from './runek/House'
 import { Lake } from './runek/Lake'
 import { Lamp } from './runek/Lamp'
 import { LightRig } from './runek/LightRig'
+import { Ocean } from './runek/Ocean'
+import { Palm } from './runek/Palm'
 import { Path } from './runek/Path'
 import { Pillar } from './runek/Pillar'
 import { Plant } from './runek/Plant'
 import { Player } from './runek/Player'
+import { Pool } from './runek/Pool'
+import { Road } from './runek/Road'
 import { Rocks } from './runek/Rocks'
 import { Roof } from './runek/Roof'
 import { Room } from './runek/Room'
 import { Rug } from './runek/Rug'
+import { Sailboat } from './runek/Sailboat'
 import { Shelf } from './runek/Shelf'
 import { Shore } from './runek/Shore'
 import { Sign } from './runek/Sign'
 import { Sky } from './runek/Sky'
+import { Slab } from './runek/Slab'
 import { Staircase } from './runek/Staircase'
 import { Table } from './runek/Table'
 import { Terrain } from './runek/Terrain'
@@ -58,9 +66,11 @@ export const registry: ComponentRegistry = {
   Bush,
   Campfire,
   Chair,
+  Cliff,
   Clock,
   Clouds,
   Crate,
+  CurvedWall,
   Door,
   Fence,
   Floor,
@@ -72,18 +82,24 @@ export const registry: ComponentRegistry = {
   Lake,
   Lamp,
   LightRig,
+  Ocean,
+  Palm,
   Path,
   Pillar,
   Plant,
   Player,
+  Pool,
+  Road,
   Rocks,
   Roof,
   Room,
   Rug,
+  Sailboat,
   Shelf,
   Shore,
   Sign,
   Sky,
+  Slab,
   Staircase,
   Table,
   Terrain,
