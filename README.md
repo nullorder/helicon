@@ -9,8 +9,11 @@ editable, procedurally generated coastline: a curved modernist mansion cantileve
 over an ocean cliff, with a glass-ringed living rotunda, a rooftop bedroom drum, a
 floating pool terrace, palms, and a helipad. An arched gate opens onto a rock
 causeway to the mainland, and the headland's east flank fans out into a sand-spit
-beach with a campfire at the waterline. Built entirely from Runek components; no
-models, no textures, no CDN.
+beach with a campfire at the waterline. A small cast of procedural people keeps
+the estate company: a gatekeeper at the arch, a host waving from the door, a
+scholar in the library, guests by the pool, a gardener at the flower bed, a
+traveler on the causeway, and two figures at the campfire. Built entirely from
+Runek components; no models, no textures, no CDN.
 
 > *Helicon is a world-as-repo: the whole scene is one JSON file. Fork it, edit it,
 > open a PR — the world grows by merge.*

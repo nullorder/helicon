@@ -2132,6 +2132,174 @@
       }
     },
     {
+      "type": "Person",
+      "id": "n5oykyj",
+      "props": {
+        "position": [
+          1.7,
+          0,
+          22.6
+        ],
+        "rotation": [
+          0,
+          -0.226,
+          0
+        ],
+        "seed": 31,
+        "kind": "guard",
+        "label": "Gatekeeper"
+      }
+    },
+    {
+      "type": "Person",
+      "id": "n908g1j",
+      "props": {
+        "position": [
+          -1.8,
+          0,
+          -5
+        ],
+        "rotation": [
+          0,
+          0.15,
+          0
+        ],
+        "seed": 12,
+        "kind": "noble",
+        "pose": "wave"
+      }
+    },
+    {
+      "type": "Person",
+      "id": "n1k6czl",
+      "props": {
+        "position": [
+          -5.9,
+          0.4,
+          -10.6
+        ],
+        "rotation": [
+          0,
+          -0.598,
+          0
+        ],
+        "seed": 44,
+        "kind": "scholar",
+        "age": "elder"
+      }
+    },
+    {
+      "type": "Person",
+      "id": "nb1ct0s",
+      "props": {
+        "position": [
+          -17.2,
+          1.55,
+          -4.2
+        ],
+        "rotation": [
+          0,
+          3.142,
+          0
+        ],
+        "seed": 23,
+        "pose": "sit",
+        "skin": "festival"
+      }
+    },
+    {
+      "type": "Person",
+      "id": "nkq6g6s",
+      "props": {
+        "position": [
+          -23.2,
+          1.55,
+          -8.6
+        ],
+        "rotation": [
+          0,
+          1.315,
+          0
+        ],
+        "seed": 58,
+        "pose": "lean",
+        "skin": "voyage"
+      }
+    },
+    {
+      "type": "Person",
+      "id": "ndtwjiq",
+      "props": {
+        "position": [
+          -8,
+          0,
+          8.2
+        ],
+        "rotation": [
+          0,
+          3.142,
+          0
+        ],
+        "seed": 17,
+        "kind": "farmer",
+        "pose": "work"
+      }
+    },
+    {
+      "type": "Person",
+      "id": "n7dzp4b",
+      "props": {
+        "position": [
+          1.2,
+          0.02,
+          48
+        ],
+        "rotation": [
+          0,
+          3.142,
+          0
+        ],
+        "seed": 71,
+        "kind": "traveler"
+      }
+    },
+    {
+      "type": "Person",
+      "id": "n41gcp5",
+      "props": {
+        "position": [
+          72.4,
+          -13.55,
+          11.6
+        ],
+        "rotation": [
+          0,
+          2.356,
+          0
+        ],
+        "seed": 19,
+        "kind": "sailor"
+      }
+    },
+    {
+      "type": "Person",
+      "id": "nah0yu9",
+      "props": {
+        "position": [
+          75.8,
+          -13.55,
+          11.4
+        ],
+        "rotation": [
+          0,
+          -2.232,
+          0
+        ],
+        "seed": 86,
+        "skin": "pirate"
+      }
+    },
+    {
       "type": "Player",
       "id": "nbgyh7i",
       "props": {
@@ -2142,7 +2310,24 @@
         ],
         "view": "first",
         "yaw": 3.142
-      }
+      },
+      "children": [
+        {
+          "type": "Person",
+          "id": "n65gr6b",
+          "props": {
+            "physics": false,
+            "height": 1.3,
+            "position": [
+              0,
+              -0.65,
+              0
+            ],
+            "seed": 7,
+            "lookAt": false
+          }
+        }
+      ]
     }
   ]
 }

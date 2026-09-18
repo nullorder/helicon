@@ -31,6 +31,7 @@ import { Lamp } from './runek/Lamp'
 import { LightRig } from './runek/LightRig'
 import { Ocean } from './runek/Ocean'
 import { Palm } from './runek/Palm'
+import { Person } from './runek/Person'
 import { Path } from './runek/Path'
 import { Pillar } from './runek/Pillar'
 import { Plant } from './runek/Plant'
@@ -84,6 +85,7 @@ export const registry: ComponentRegistry = {
   LightRig,
   Ocean,
   Palm,
+  Person,
   Path,
   Pillar,
   Plant,
