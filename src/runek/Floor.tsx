@@ -1,5 +1,6 @@
 import { RigidBody } from '@react-three/rapier'
 import { useWorld, type Vec3 } from '@runek/core'
+import { floorSurface } from './surfaces/floor'
 
 /** A rectangular hole in the slab, e.g. a stairwell. */
 export interface FloorOpening {
@@ -14,6 +15,8 @@ export interface FloorOpening {
 export interface FloorProps {
   position?: Vec3
   rotation?: Vec3
+  /** Accepted for the component contract; this component has no seeded variation yet. */
+  seed?: number
   /** `[width, depth]` in units. The top surface sits at the component origin. */
   size?: [number, number]
   thickness?: number
@@ -93,3 +96,5 @@ export function Floor({
     </RigidBody>
   )
 }
+
+Floor.surface = floorSurface

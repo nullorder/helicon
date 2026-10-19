@@ -2,10 +2,13 @@ import { useFrame } from '@react-three/fiber'
 import { useWorld, type Vec3 } from '@runek/core'
 import { useMemo, useRef } from 'react'
 import * as THREE from 'three'
+import { lakeSurface } from './surfaces/lake'
 
 export interface LakeProps {
   position?: Vec3
   rotation?: Vec3
+  /** Accepted for the component contract; this component has no seeded variation yet. */
+  seed?: number
   /** Water surface `[width, depth]`, in units. */
   size?: [number, number]
   /** Defaults to the world palette's `waterDeep` slot. */
@@ -136,3 +139,5 @@ export function Lake({
     </mesh>
   )
 }
+
+Lake.surface = lakeSurface

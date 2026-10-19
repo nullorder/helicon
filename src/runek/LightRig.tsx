@@ -1,9 +1,9 @@
-import { useFrame } from '@react-three/fiber'
-import { currentHours, sunState, useWorld, type Vec3 } from '@runek/core'
-import { useState } from 'react'
+import { useSun, type Vec3 } from '@runek/core'
 import { Color } from 'three'
 
 export interface LightRigProps {
+  /** Accepted for the component contract; this component has no seeded variation yet. */
+  seed?: number
   sunPosition?: Vec3
   sunColor?: string
   sunIntensity?: number
@@ -41,16 +41,7 @@ export function LightRig({
   shadows = true,
   shadowRange = 30,
 }: LightRigProps) {
-  const { time } = useWorld()
-
-  const [hours, setHours] = useState(() => currentHours(time))
-  useFrame(() => {
-    if (!time.live) return
-    const h = currentHours(time)
-    setHours((prev) => (Math.abs(h - prev) > 0.02 ? h : prev))
-  })
-
-  const sun = sunState(hours)
+  const sun = useSun()
   const e = sun.elevation
 
   const position = sunPosition ?? sun.position

@@ -7,6 +7,8 @@ import type { PointLight } from 'three'
 export interface LampProps {
   position?: Vec3
   rotation?: Vec3
+  /** Accepted for the component contract; this component has no seeded variation yet. */
+  seed?: number
   height?: number
   /** Base + pole color. Defaults to the world palette's `metal` slot. */
   color?: string
@@ -78,3 +80,5 @@ export function Lamp({
     </RigidBody>
   )
 }
+
+Lamp.groundSitting = true

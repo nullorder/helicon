@@ -1,9 +1,12 @@
 import { RigidBody } from '@react-three/rapier'
 import { useWorld, type Vec3 } from '@runek/core'
+import { shoreSurface } from './surfaces/shore'
 
 export interface ShoreProps {
   position?: Vec3
   rotation?: Vec3
+  /** Accepted for the component contract; this component has no seeded variation yet. */
+  seed?: number
   /** `[width, depth]` in units. The sandy top sits at the component origin. */
   size?: [number, number]
   thickness?: number
@@ -33,3 +36,5 @@ export function Shore({
     </RigidBody>
   )
 }
+
+Shore.surface = shoreSurface
