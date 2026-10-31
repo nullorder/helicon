@@ -1,7 +1,15 @@
 import { Html } from '@react-three/drei'
-import type { ThreeEvent } from '@react-three/fiber'
+import { type ThreeEvent, useFrame } from '@react-three/fiber'
 import { CuboidCollider, RigidBody } from '@react-three/rapier'
-import { rng, useWorld, type Vec3 } from '@runek/core'
+import {
+  DEFAULT_REACH,
+  rng,
+  useLensPosition,
+  useMaterials,
+  useReach,
+  useWorld,
+  type Vec3,
+} from '@runek/core'
 import { useLayoutEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { Sign } from './Sign'
@@ -57,6 +65,9 @@ export interface BookshelfProps {
   books?: BookSpec[]
   /** Called with the clicked book. When omitted, a book's `href` is navigated to. */
   onBookSelect?: (book: BookSpec) => void
+  /** How close the player's avatar (its eyes) must be to a book to hover or click it, in units.
+   *  Only applies while a `Player` is mounted; with a free camera every book is in reach. */
+  reach?: number
   /**
    * Section label rendered above the shelf, e.g. `"Guides"`. Drawn as a `Sign`
    * in the world's `display` face.
@@ -96,13 +107,18 @@ export function Bookshelf({
   seed = 1,
   books: bookSpecs,
   onBookSelect,
+  reach = DEFAULT_REACH,
   label,
   labelColor,
   labelSize = 0.08,
 }: BookshelfProps) {
   const { unit, palette } = useWorld()
-  const frameColor = color ?? palette.wood
-  const panelColor = backColor ?? palette.woodDark
+  const labelAt = useLensPosition()
+  const m = useMaterials({
+    frame: { color: color ?? palette.wood },
+    panel: { color: backColor ?? palette.woodDark },
+    books: { roughness: 0.85 },
+  })
   const w = width * unit
   const h = height * unit
   const d = depth * unit
@@ -111,6 +127,8 @@ export function Bookshelf({
   const gap = (h - plank) / shelves
   const booksRef = useRef<THREE.InstancedMesh>(null)
   const [hovered, setHovered] = useState<number | null>(null)
+  const inReach = useReach(reach)
+  const lastHit = useRef<THREE.Vector3 | null>(null)
 
   const books = useMemo<Book[]>(() => {
     const next = rng(seed)
@@ -241,7 +259,7 @@ export function Bookshelf({
 
   const handleClick = (e: ThreeEvent<MouseEvent>) => {
     const id = e.instanceId
-    if (id == null) return
+    if (id == null || !inReach(e.point)) return
     const spec = books[id]?.spec
     if (!spec) return
     e.stopPropagation()
@@ -249,13 +267,16 @@ export function Bookshelf({
     else if (spec.href) window.location.href = spec.href
   }
 
+  const handleOut = () => {
+    setHovered(null)
+    document.body.style.cursor = 'auto'
+  }
+
   const handleMove = (e: ThreeEvent<PointerEvent>) => {
     const spec = e.instanceId != null ? books[e.instanceId]?.spec : undefined
-    if (!spec) {
-      if (hovered != null) {
-        setHovered(null)
-        document.body.style.cursor = 'auto'
-      }
+    lastHit.current = e.point.clone()
+    if (!spec || !inReach(e.point)) {
+      if (hovered != null) handleOut()
       return
     }
     e.stopPropagation()
@@ -263,10 +284,10 @@ export function Bookshelf({
     document.body.style.cursor = 'pointer'
   }
 
-  const handleOut = () => {
-    setHovered(null)
-    document.body.style.cursor = 'auto'
-  }
+  // Walking away with the pointer still on a book leaves no pointer event to clear it.
+  useFrame(() => {
+    if (hovered != null && lastHit.current && !inReach(lastHit.current)) handleOut()
+  })
 
   const hoveredBook = hovered != null ? books[hovered] : undefined
 
@@ -275,23 +296,25 @@ export function Bookshelf({
       {/* one collider for the whole footprint — books stay visual-only */}
       <CuboidCollider args={[w / 2, h / 2, d / 2]} />
 
-      <mesh castShadow receiveShadow position={[-w / 2 + plank / 2, 0, 0]}>
+      <mesh material={m.frame} castShadow receiveShadow position={[-w / 2 + plank / 2, 0, 0]}>
         <boxGeometry args={[plank, h, d]} />
-        <meshStandardMaterial color={frameColor} />
       </mesh>
-      <mesh castShadow receiveShadow position={[w / 2 - plank / 2, 0, 0]}>
+      <mesh material={m.frame} castShadow receiveShadow position={[w / 2 - plank / 2, 0, 0]}>
         <boxGeometry args={[plank, h, d]} />
-        <meshStandardMaterial color={frameColor} />
       </mesh>
-      <mesh castShadow receiveShadow position={[0, 0, -d / 2 + plank / 2]}>
+      <mesh material={m.panel} castShadow receiveShadow position={[0, 0, -d / 2 + plank / 2]}>
         <boxGeometry args={[w, h, plank]} />
-        <meshStandardMaterial color={panelColor} />
       </mesh>
 
       {plankYs.map((y) => (
-        <mesh key={`plank-${y.toFixed(4)}`} castShadow receiveShadow position={[0, y, 0]}>
+        <mesh
+          key={`plank-${y.toFixed(4)}`}
+          material={m.frame}
+          castShadow
+          receiveShadow
+          position={[0, y, 0]}
+        >
           <boxGeometry args={[inner, plank, d]} />
-          <meshStandardMaterial color={frameColor} />
         </mesh>
       ))}
 
@@ -313,13 +336,13 @@ export function Bookshelf({
           key={books.length}
           ref={booksRef}
           args={[undefined, undefined, books.length]}
+          material={m.books}
           castShadow
           onClick={interactive ? handleClick : undefined}
           onPointerMove={interactive ? handleMove : undefined}
           onPointerOut={interactive ? handleOut : undefined}
         >
           <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial roughness={0.85} />
         </instancedMesh>
       )}
 
@@ -330,6 +353,7 @@ export function Bookshelf({
             hoveredBook.y + hoveredBook.height / 2 + 0.12 * unit,
             hoveredBook.depth,
           ]}
+          calculatePosition={labelAt}
           center
           distanceFactor={6}
           zIndexRange={[30, 0]}

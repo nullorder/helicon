@@ -1,6 +1,16 @@
 import { Html } from '@react-three/drei'
-import { rng, useWorld, type Vec3 } from '@runek/core'
-import { useMemo, useState } from 'react'
+import { type ThreeEvent, useFrame } from '@react-three/fiber'
+import {
+  DEFAULT_REACH,
+  rng,
+  useLensPosition,
+  useMaterials,
+  useReach,
+  useWorld,
+  type Vec3,
+} from '@runek/core'
+import { useMemo, useRef, useState } from 'react'
+import type { Vector3 } from 'three'
 
 export type BookPose = 'standing' | 'lying' | 'open'
 
@@ -27,6 +37,9 @@ export interface BookProps {
   href?: string
   /** Called on click. Optional, so the book still renders from data. */
   onSelect?: () => void
+  /** How close the player's avatar (its eyes) must be to hover or click the book, in units.
+   *  Only applies while a `Player` is mounted; with a free camera it's always in reach. */
+  reach?: number
   seed?: number
 }
 
@@ -48,10 +61,23 @@ export function Book({
   title,
   href,
   onSelect,
+  reach = DEFAULT_REACH,
   seed = 1,
 }: BookProps) {
   const { unit } = useWorld()
+  const labelAt = useLensPosition()
   const [hovered, setHovered] = useState(false)
+  const inReach = useReach(reach)
+  const lastHit = useRef<Vector3 | null>(null)
+
+  const hover = (on: boolean) => {
+    if (on !== hovered) setHovered(on)
+    document.body.style.cursor = on ? 'pointer' : 'auto'
+  }
+  // Walking away with the pointer still on the book leaves no pointer event to clear it.
+  useFrame(() => {
+    if (hovered && lastHit.current && !inReach(lastHit.current)) hover(false)
+  })
 
   const w = width * unit
   const h = height * unit
@@ -65,24 +91,27 @@ export function Book({
       35 + next() * 15,
     )}%)`
   }, [color, seed])
+  const m = useMaterials({
+    cover: { color: coverColor, roughness: 0.75 },
+    pages: { color: pageColor, roughness: 0.9 },
+  })
 
   const interactive = onSelect != null || href != null
   const handlers = interactive
     ? {
-        onClick: (e: { stopPropagation: () => void }) => {
+        onClick: (e: ThreeEvent<MouseEvent>) => {
+          if (!inReach(e.point)) return
           e.stopPropagation()
           if (onSelect) onSelect()
           else if (href) window.location.href = href
         },
-        onPointerOver: (e: { stopPropagation: () => void }) => {
-          e.stopPropagation()
-          setHovered(true)
-          document.body.style.cursor = 'pointer'
+        onPointerMove: (e: ThreeEvent<PointerEvent>) => {
+          lastHit.current = e.point.clone()
+          const near = inReach(e.point)
+          if (near) e.stopPropagation()
+          hover(near)
         },
-        onPointerOut: () => {
-          setHovered(false)
-          document.body.style.cursor = 'auto'
-        },
+        onPointerOut: () => hover(false),
       }
     : {}
 
@@ -90,21 +119,17 @@ export function Book({
   // z = spine length; resting on y = 0 with the spine along the -x edge.
   const closed = (
     <group>
-      <mesh castShadow position={[0.01 * unit, t / 2, 0]}>
+      <mesh material={m.pages} castShadow position={[0.01 * unit, t / 2, 0]}>
         <boxGeometry args={[w * 0.94, Math.max(t - board * 2, t * 0.5), h * 0.95]} />
-        <meshStandardMaterial color={pageColor} roughness={0.9} />
       </mesh>
-      <mesh castShadow position={[0, board / 2, 0]}>
+      <mesh material={m.cover} castShadow position={[0, board / 2, 0]}>
         <boxGeometry args={[w, board, h]} />
-        <meshStandardMaterial color={coverColor} roughness={0.75} />
       </mesh>
-      <mesh castShadow position={[0, t - board / 2, 0]}>
+      <mesh material={m.cover} castShadow position={[0, t - board / 2, 0]}>
         <boxGeometry args={[w, board, h]} />
-        <meshStandardMaterial color={coverColor} roughness={0.75} />
       </mesh>
-      <mesh castShadow position={[-w / 2 + board / 2, t / 2, 0]}>
+      <mesh material={m.cover} castShadow position={[-w / 2 + board / 2, t / 2, 0]}>
         <boxGeometry args={[board, t, h]} />
-        <meshStandardMaterial color={coverColor} roughness={0.75} />
       </mesh>
     </group>
   )
@@ -114,13 +139,11 @@ export function Book({
   const halfPages = Math.max((t - board * 2) / 2, t * 0.25)
   const openHalf = (side: 1 | -1) => (
     <group key={side} scale={[side, 1, 1]} rotation={[0, 0, -openTilt]}>
-      <mesh castShadow position={[w / 2, board / 2, 0]}>
+      <mesh material={m.cover} castShadow position={[w / 2, board / 2, 0]}>
         <boxGeometry args={[w, board, h]} />
-        <meshStandardMaterial color={coverColor} roughness={0.75} />
       </mesh>
-      <mesh castShadow position={[(w / 2) * 0.98, board + halfPages / 2, 0]}>
+      <mesh material={m.pages} castShadow position={[(w / 2) * 0.98, board + halfPages / 2, 0]}>
         <boxGeometry args={[w * 0.92, halfPages, h * 0.94]} />
-        <meshStandardMaterial color={pageColor} roughness={0.9} />
       </mesh>
     </group>
   )
@@ -150,7 +173,13 @@ export function Book({
         {body}
       </group>
       {hovered && title && (
-        <Html position={[0, labelY, 0]} center distanceFactor={6} zIndexRange={[30, 0]}>
+        <Html
+          position={[0, labelY, 0]}
+          calculatePosition={labelAt}
+          center
+          distanceFactor={6}
+          zIndexRange={[30, 0]}
+        >
           <div
             style={{
               padding: '2px 8px',

@@ -1,10 +1,18 @@
 import { useKeyboardControls } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useRapier } from '@react-three/rapier'
-import { type AvatarView, PlayerMotionContext, useWorld, type Vec3 } from '@runek/core'
+import {
+  type AvatarView,
+  Dynamic,
+  PlayerMotionContext,
+  useMaterial,
+  useWorld,
+  type Vec3,
+} from '@runek/core'
 import Ecctrl, { type CustomEcctrlRigidBody } from 'ecctrl'
 import { type ReactNode, type RefObject, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import type { Object3D, Scene } from 'three'
+import type { Group, Object3D, Scene } from 'three'
+import { PaniniLens } from './player/PaniniLens'
 
 export type PlayerView = AvatarView
 
@@ -91,6 +99,31 @@ function MotionProbe({
   return null
 }
 
+/** Lower the body the avatar carries onto the ground. ecctrl holds the capsule `FLOAT_HEIGHT`
+ *  above it on a spring, applied as one impulse a frame against a frame's worth of gravity, so
+ *  the capsule settles lower by m·g·dt / k. Dropping the body by the rest stands its feet (the
+ *  capsule's bottom) on the ground at any frame rate. */
+function StandOnGround({
+  body,
+  lift,
+}: {
+  body: RefObject<CustomEcctrlRigidBody | null>
+  lift: RefObject<Group | null>
+}) {
+  const { gravity } = useWorld()
+  useFrame((_, dt) => {
+    const rb = body.current?.group
+    const group = lift.current
+    if (!rb || !group) return
+    const g = Math.abs(gravity[1]) * rb.gravityScale()
+    const sag = (rb.mass() * g * Math.min(dt, 0.5)) / SPRING_K
+    const drop = Math.max(FLOAT_HEIGHT - sag, 0)
+    // Eased, so frame-time jitter doesn't shake the body.
+    group.position.y += (-drop - group.position.y) * Math.min(1, dt * 8)
+  })
+  return null
+}
+
 // How long the avatar waits for ground to appear beneath it before it falls anyway (spawning
 // over open water, say), in seconds.
 const GROUND_WAIT = 0.5
@@ -135,8 +168,23 @@ export interface PlayerProps {
   view?: PlayerView
   /** Initial camera yaw in radians (0 faces +z). */
   yaw?: number
+  /** How wide the first-person view is, in degrees across, on a 16:9 screen. The default,
+   *  140, takes in most of what both eyes see, so the world wraps around you instead of
+   *  sitting behind a window. Like most games it follows the screen's shape, not its size: a
+   *  wider screen (an ultrawide or curved monitor) keeps the same angle top to bottom and sees
+   *  more across, up to 200°; a narrower one sees less across, down to 110°, then holds that
+   *  and opens up top to bottom, until a tall phone screen just shows less across. It is drawn
+   *  through a gently curved (Panini) lens: true to life straight ahead, the sides squeezed in
+   *  rather than stretched as a flat camera would. Third-person and overhead keep the world
+   *  camera's own lens. */
+  fov?: number
+  /** How blurred the very edge of the first-person view is, in CSS pixels, easing to sharp
+   *  toward the centre the way peripheral vision does; turn to look at something and it comes
+   *  into focus. 0 turns it off. */
+  peripheralBlur?: number
   /** Custom avatar visual, replacing the default capsule. Size it to the capsule
-   *  envelope (~1.3 units tall, centered at the character origin); it is hidden in
+   *  envelope (1.3 units tall, centered at the character origin, so feet go at y = -0.65);
+   *  the Player lowers it onto the ground beneath the floating capsule. It is hidden in
    *  first-person view. In world JSON, nest it as a child node of the Player. */
   children?: ReactNode
 }
@@ -196,10 +244,20 @@ const VIEWS: PlayerView[] = ['first', 'third', 'overhead']
 
 const CAPSULE_RADIUS = 0.3
 const CAPSULE_HALF_HEIGHT = 0.35
+// ecctrl's float spring, passed explicitly because `StandOnGround` depends on both.
+const FLOAT_HEIGHT = 0.3
+const SPRING_K = 1.2
 // Where the avatar's eyes sit on the capsule: what others look at when they look at the player.
 const EYE_HEIGHT = 0.5
 
-export function Player({ position = [0, 3, 0], view, yaw = 0, children }: PlayerProps) {
+export function Player({
+  position = [0, 3, 0],
+  view,
+  yaw = 0,
+  fov = 140,
+  peripheralBlur = 4,
+  children,
+}: PlayerProps) {
   const { avatar, player, keyboard, controls } = useWorld()
   const scene = useThree((s) => s.scene)
   const wanted = view ?? avatar ?? 'first'
@@ -211,6 +269,8 @@ export function Player({ position = [0, 3, 0], view, yaw = 0, children }: Player
   const body = useRef<CustomEcctrlRigidBody>(null)
   const [grounded, setGrounded] = useState(false)
   const motion = useRef({ speed: 0 })
+  const lift = useRef<Group>(null)
+  const capsule = useMaterial({ color: '#4a90d9' })
 
   // ecctrl reads its camera setup once, at mount, so a new view remounts it: from where the
   // avatar stands now, facing the way the camera faced. The old camera pivot is taken out of the
@@ -277,6 +337,8 @@ export function Player({ position = [0, 3, 0], view, yaw = 0, children }: Player
       camCollision={cam.collision}
       capsuleRadius={CAPSULE_RADIUS}
       capsuleHalfHeight={CAPSULE_HALF_HEIGHT}
+      floatHeight={FLOAT_HEIGHT}
+      springK={SPRING_K}
       camInitDis={cam.distance}
       camMinDis={cam.zoom[0]}
       camMaxDis={cam.zoom[1]}
@@ -285,19 +347,22 @@ export function Player({ position = [0, 3, 0], view, yaw = 0, children }: Player
       camFollowMult={cam.follow}
       camLerpMult={cam.lerp}
     >
-      <group visible={!firstPerson}>
-        <PlayerMotionContext.Provider value={motion}>
-          {children ?? (
-            <mesh castShadow>
-              <capsuleGeometry args={[CAPSULE_RADIUS, CAPSULE_HALF_HEIGHT * 2, 8, 16]} />
-              <meshStandardMaterial color="#4a90d9" />
-            </mesh>
-          )}
-        </PlayerMotionContext.Provider>
-      </group>
+      <Dynamic>
+        <group ref={lift} visible={!firstPerson} position={[0, -FLOAT_HEIGHT, 0]}>
+          <PlayerMotionContext.Provider value={motion}>
+            {children ?? (
+              <mesh material={capsule} castShadow>
+                <capsuleGeometry args={[CAPSULE_RADIUS, CAPSULE_HALF_HEIGHT * 2, 8, 16]} />
+              </mesh>
+            )}
+          </PlayerMotionContext.Provider>
+        </group>
+      </Dynamic>
       <object3D ref={eyes} position={[0, EYE_HEIGHT, 0]} />
       <CameraKeyLook pitchable={!cam.locked} />
+      {firstPerson && <PaniniLens fov={fov} blur={peripheralBlur} />}
       {!firstPerson && <MotionProbe body={body} motion={motion} />}
+      {!firstPerson && <StandOnGround body={body} lift={lift} />}
       {!grounded && <GroundGuard body={body} onGrounded={() => setGrounded(true)} />}
     </Ecctrl>
   )
